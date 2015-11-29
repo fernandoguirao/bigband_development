@@ -1,0 +1,48 @@
+/*
+
+SPACING CLASSES
+
+This mixing outputs the classes for control spacing: padding and margin.
+
+The output is:
+
+.xs-max-margin-t-12
+
+Output explained:
+
+.{screen size}-{if the screen size is the minimum or the maximum}-{property}-{t-> top, b-> bottom, l-> left, r-> right, nothing for all}-{number of pixels}
+
+If you want to add 8 pixels of margin botton only visible in small or bigger screens, you'll use this class:
+
+.sm-min-margin-b-8
+
+*/
+
+@mixin spacing-classes($space, $size, $maxmin, $mediaquery, $amount) {
+  @for $i from 0 through $amount {
+    @media(#{$maxmin}-width: #{$mediaquery}) {
+      .#{$size}-#{$maxmin}-#{$space}-#{$i*4} {
+        #{$space}: $i*4+px !important;
+      }
+      .#{$size}-#{$maxmin}-#{$space}-t-#{$i*4} {
+        #{$space}-top: $i*4+px !important;
+      }
+      .#{$size}-#{$maxmin}-#{$space}-b-#{$i*4} {
+        #{$space}-bottom: $i*4+px !important;
+      }
+      .#{$size}-#{$maxmin}-#{$space}-l-#{$i*4} {
+        #{$space}-left: $i*4+px !important;
+      }
+      .#{$size}-#{$maxmin}-#{$space}-r-#{$i*4} {
+        #{$space}-right: $i*4+px !important;
+      }
+      .#{$size}-#{$maxmin}-#{$space}-h-#{$i*4} {
+        #{$space}-left: $i*4+px !important;
+        #{$space}-right: $i*4+px !important;
+      }
+    }
+  }
+}
+
+@include spacing-classes(padding,xs,max,$screen-xs-max,10);
+@include spacing-classes(margin,xs,max,$screen-xs-max,10);
